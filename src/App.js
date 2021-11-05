@@ -24,9 +24,6 @@ function App() {
     );
   }
   Promise.all(promises).then(() => console.log(getOperation)); 
-  // async function getWeather(cityNames) {
-
-  // }
 
 
   const lsCities = [
