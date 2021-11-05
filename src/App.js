@@ -3,6 +3,7 @@ import City from './components/City';
 import ButtonAppBar from './components/ButtonAppBar';
 import * as React from 'react';
 import ReactDOM from 'react-dom';
+import CityCard from './components/CityCard';
 
 function App() {
 
@@ -27,12 +28,13 @@ function App() {
       <header className="App-header">
         <ButtonAppBar/>
       </header>
+      {/* <CityCard key={`city__${city.id}`} name={city.name}/> */}
       <div className="cityContainer">
         {lsCities.map((city) => (
-          <City key={`city__${city.id}`} name={city.name}>
+          <CityCard key={`city__${city.id}`} name={city.name}>
             {city.temperature}
             {city.humidity}
-          </City>
+          </CityCard>
         ))}
 
       </div>
