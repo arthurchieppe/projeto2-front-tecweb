@@ -1,7 +1,8 @@
-import logo from './logo.svg';
 import './App.css';
-import AppBar from './components/AppBar';
 import City from './components/City';
+import ButtonAppBar from './components/ButtonAppBar';
+import * as React from 'react';
+import ReactDOM from 'react-dom';
 
 function App() {
 
@@ -24,7 +25,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <AppBar/>
+        <ButtonAppBar/>
       </header>
       <div className="cityContainer">
         {lsCities.map((city) => (
