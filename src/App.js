@@ -1,5 +1,4 @@
 import './App.css';
-import City from './components/City';
 import ButtonAppBar from './components/ButtonAppBar';
 import * as React from 'react';
 import ReactDOM from 'react-dom';
@@ -11,9 +10,10 @@ function App() {
   const token = "b41e25882385ee402f115680cb550c54"
 
   // const [cityNames, setCityNames] = useState([]); //Para quando eu tiber backend, esperar request do back chegar apra rodar front
-  const cityNames = ["São Paulo","Vitória"]
+  const cityNames = ["São Paulo","Vitória"];
   let promises = [];
   const [getCities, setCities] = useState([]);
+  const [isLoading, setLoading] = useState(true);
   useEffect(() => {
     for (let city of cityNames) {
     promises.push(
@@ -24,13 +24,17 @@ function App() {
       })
     );
   }
-  Promise.all(promises).then(() => console.log(getCities));
+  setCities(getCities);
+  Promise.all(promises).then(() => setLoading(false));
+  
 }, [] );
+
+if (isLoading) {
+  return <div className="cityContainer">Loading...</div>;
+}
   
   
-   
-
-
+  
   const lsCities = [
     {
       id: 1,
@@ -54,10 +58,10 @@ function App() {
       </header>
       {/* <CityCard key={`city__${city.id}`} name={city.name}/> */}
       <div className="cityContainer">
-        {lsCities.map((city) => (
+        {getCities.map((city) => (
           <CityCard key={`city__${city.id}`} name={city.name}>
-            {city.temperature}
-            {city.humidity}
+            {city.main.temp-273.15}
+            {city.main.humidity}
           </CityCard>
         ))}
 
