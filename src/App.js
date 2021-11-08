@@ -13,17 +13,22 @@ function App() {
   // const [cityNames, setCityNames] = useState([]); //Para quando eu tiber backend, esperar request do back chegar apra rodar front
   const cityNames = ["São Paulo","Vitória"]
   let promises = [];
-  let getOperation = [];
-  for (let city of cityNames) {
+  const [getCities, setCities] = useState([]);
+  useEffect(() => {
+    for (let city of cityNames) {
     promises.push(
       axios
       .get(`http://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=b41e25882385ee402f115680cb550c54`)
       .then((response) => {
-        getOperation.push(response.data);
+        getCities.push(response.data);
       })
     );
   }
-  Promise.all(promises).then(() => console.log(getOperation)); 
+  Promise.all(promises).then(() => console.log(getCities));
+}, [] );
+  
+  
+   
 
 
   const lsCities = [
