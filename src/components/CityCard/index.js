@@ -63,10 +63,12 @@ export default function CityCard(props) {
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
-          <ul>
-              <li>{props.children[0]}</li>
-              <li>{props.children[1]}</li>
-          </ul>
+        <Typography sx={{ mt: 4, mb: 2 }} variant="h6">
+            Temperature: {Math.round(props.children[0])}
+            <br/>
+            Humidity: {props.children[1]}
+            
+          </Typography>
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
