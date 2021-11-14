@@ -62,13 +62,14 @@ export default function CityCard(props) {
         alt="Paella dish"
       />
       <CardContent>
-        <Typography variant="body2" color="text.secondary">
-        <Typography sx={{ mt: 4, mb: 2 }} variant="h6">
-            Temperature: {Math.round(props.children[0])}
+        <Typography variant="h6" color="text.secondary" sx={{ mt: 4, mb: 2 }}>
+            Temperature: {Math.round(props.children[0])} °C
             <br/>
-            Humidity: {props.children[1]}
-            
-          </Typography>
+            Max Temp: {Math.round(props.children[1])} °C
+            <br/>
+            Min Temp: {Math.round(props.children[2])} °C
+            <br/>
+            Humidity: {Math.round(props.children[3])} %
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
