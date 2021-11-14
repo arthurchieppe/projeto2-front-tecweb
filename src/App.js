@@ -63,6 +63,7 @@ function App() {
             {city.main.temp_max-273.15}
             {city.main.temp_min-273.15}
             {city.main.humidity}
+            {city.weather[0].main}
           </CityCard>
         ))}
       </Grid>

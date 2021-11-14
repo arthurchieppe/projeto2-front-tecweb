@@ -20,6 +20,9 @@ import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import PushPinIcon from '@mui/icons-material/PushPin';  //Salvo
 import PushPinOutlinedIcon from '@mui/icons-material/PushPinOutlined';  //Ainda nao salvo
 
+import axios from "axios";
+
+
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -38,6 +41,7 @@ export default function CityCard(props) {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+  
 
   return (
     <Card sx={{ maxWidth: 345 }}>
@@ -53,7 +57,7 @@ export default function CityCard(props) {
           </IconButton>
         }
         title={props.name}
-        subheader="September 14, 2016"
+        subheader={props.children[4]}
       />
       <CardMedia
         component="img"

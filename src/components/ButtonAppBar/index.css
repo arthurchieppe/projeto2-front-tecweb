@@ -2,3 +2,8 @@
     height: 100px;
     width: auto;
 }
+
+.citySearch {
+    background-color: #000;
+    color: green;
+}
