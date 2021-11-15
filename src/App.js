@@ -17,11 +17,12 @@ function App() {
   const [getCities, setCities] = useState([]);
   const [isLoading, setLoading] = useState(true);
   const username = "Teste" //Modificar aqui username
+  const cityNames = [];
   useEffect(() => {
     axios //Axios para Backend
     .get(`http://127.0.0.1:8000/api/user/${username}/`)
     .then((response) => {
-    console.log(response.data)
+    // console.log(response.data)
     const cityNames = response.data.cities
     for (let city of cityNames) {
     promises.push(
@@ -45,7 +46,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <ButtonAppBar/>
+        <ButtonAppBar cityNames={cityNames} username={username}/>
       </header>
       <Grid
         container

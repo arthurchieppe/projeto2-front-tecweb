@@ -7,10 +7,47 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import TextField from '@mui/material/TextField';
+import axios from "axios";
+import { useRef, Component } from 'react';
+
 
 // https://mui.com/pt/components/app-bar/
 
-export default function ButtonAppBar() {
+export default function ButtonAppBar(props) {
+  const token = "b41e25882385ee402f115680cb550c54";
+  const username = props.username;
+
+  const valueRef = useRef('');
+
+  const sendValue = () => {
+    let city = valueRef.current.value;
+    //Primeiro dar get para ver se existe:
+    axios
+    .get(`http://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${token}`)
+    .then((response) => {
+      if (response.data.code == "404") {
+        return; //Caso cidade nao exista, nao faca nada
+      }
+      axios
+      .get(`http://127.0.0.1:8000/api/user/${username}/`)
+      .then((response) => {
+        const lsCities = response.data.cities;
+      
+      
+      
+      console.log("aaa");
+      console.log(lsCities);
+      lsCities.push(city);
+      axios
+      .post(`http://127.0.0.1:8000/api/user/${username}/`, {
+        "cities": lsCities
+    })
+    .then((response) => window.location.reload())
+  }
+  );
+  })
+}
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{backgroundColor: " #336A8C"}}>
@@ -57,8 +94,11 @@ export default function ButtonAppBar() {
             }}>
 
           
-            <TextField fullWidth={true} id="filled-basic" label="Type a city..." variant="filled" className="citySearch"/>
-            <Button color="inherit">Add</Button>
+            <TextField fullWidth={true} id="filled-basic" label="Type a city..." variant="filled" className="citySearch" inputRef={valueRef}/>
+            <Button color="inherit" onClick={
+              sendValue}>
+              Add
+              </Button>
               </Box>
             {/* </Box> */}
           <Box>
