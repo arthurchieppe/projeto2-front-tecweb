@@ -14,6 +14,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 // Icons:
 import WbSunnyIcon from '@mui/icons-material/WbSunny';
@@ -21,6 +22,8 @@ import PushPinIcon from '@mui/icons-material/PushPin';  //Salvo
 import PushPinOutlinedIcon from '@mui/icons-material/PushPinOutlined';  //Ainda nao salvo
 
 import axios from "axios";
+import { WindowSharp } from '@mui/icons-material';
+import { useState, useEffect} from "react";
 
 
 const ExpandMore = styled((props) => {
@@ -41,7 +44,42 @@ export default function CityCard(props) {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+  var deleteName = '';
   
+  function deleteCity(name) {
+     axios
+      .get(`http://127.0.0.1:8000/api/user/${props.username}/`)
+      .then((response) => {
+      const lsCities = response.data.cities;
+      // const normalized = name.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+      console.log(name)
+      let arr = lsCities.filter(e => e !== name);
+      console.log(arr) // https://stackoverflow.com/questions/9792927/javascript-array-search-and-remove-string
+      axios
+      .post(`http://127.0.0.1:8000/api/user/${props.username}/`, {
+        "cities": arr
+    })
+    .then(window.location.reload())
+    }); 
+  }
+
+  function buildImageUrl() {
+    let url = `http://openweathermap.org/img/w/${props.image}.png`;
+    return url
+
+  }
+
+  //https://stackoverflow.com/questions/32589197/how-can-i-capitalize-the-first-letter-of-each-word-in-a-string-using-javascript
+  function titleCase(str) {
+    var splitStr = str.toLowerCase().split(' ');
+    for (var i = 0; i < splitStr.length; i++) {
+        // You do not need to check if i is larger than splitStr length, as your for does that for you
+        // Assign it back to the array
+        splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);     
+    }
+    // Directly return the joined string
+    return splitStr.join(' '); 
+ }
 
   return (
     <Card sx={{ maxWidth: 345 }}>
@@ -52,17 +90,17 @@ export default function CityCard(props) {
           </Avatar>
         }
         action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
+          <IconButton aria-label="settings" onClick={() => {deleteCity(props.name)}}>
+            <DeleteForeverIcon/>
           </IconButton>
         }
         title={props.name}
-        subheader={props.children[4]}
+        subheader={titleCase(props.children[4])}
       />
       <CardMedia
         component="img"
         height="194"
-        image="/static/images/cards/paella.jpg"
+        image={buildImageUrl()}
         alt="Paella dish"
       />
       <CardContent>
@@ -77,12 +115,12 @@ export default function CityCard(props) {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
+        {/* <IconButton aria-label="add to favorites">
           <PushPinOutlinedIcon />
         </IconButton>
         <IconButton aria-label="share">
           <ShareIcon />
-        </IconButton>
+        </IconButton> */}
         <ExpandMore
           expand={expanded}
           onClick={handleExpandClick}

@@ -59,12 +59,12 @@ function App() {
         
       >
         {getCities.map((city) => (
-          <CityCard key={`city__${city.id}`} name={city.name}>
+          <CityCard key={`city__${city.id}`} name={city.name} username={username} image={city.weather[0].icon}>
             {city.main.temp-273.15}
             {city.main.temp_max-273.15}
             {city.main.temp_min-273.15}
             {city.main.humidity}
-            {city.weather[0].main}
+            {city.weather[0].description}
           </CityCard>
         ))}
       </Grid>

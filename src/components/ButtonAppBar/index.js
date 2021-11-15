@@ -19,6 +19,7 @@ export default function ButtonAppBar(props) {
 
   const valueRef = useRef('');
 
+  //https://stackoverflow.com/questions/29791721/how-get-data-from-material-ui-textfield-dropdownmenu-components
   const sendValue = () => {
     let city = valueRef.current.value;
     //Primeiro dar get para ver se existe:
@@ -27,6 +28,9 @@ export default function ButtonAppBar(props) {
     .then((response) => {
       if (response.data.code == "404") {
         return; //Caso cidade nao exista, nao faca nada
+      }
+      else {
+        city = response.data.name
       }
       axios
       .get(`http://127.0.0.1:8000/api/user/${username}/`)
