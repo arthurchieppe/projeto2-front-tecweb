@@ -105,9 +105,9 @@ export default function ButtonAppBar(props) {
               </Button>
               </Box>
             {/* </Box> */}
-          <Box>
-            <Button color="inherit">Login</Button>
-            </Box>
+          {/* <Box>
+            <Button color="inherit"></Button>
+            </Box> */}
           
         </Toolbar>
       </AppBar>
