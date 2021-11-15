@@ -16,13 +16,13 @@ function App() {
   let promises = [];
   const [getCities, setCities] = useState([]);
   const [isLoading, setLoading] = useState(true);
-  const username = "Teste" //Modificar aqui username
+  const username = "default" //Modificar aqui username
   const cityNames = [];
   useEffect(() => {
     axios //Axios para Backend
     .get(`http://127.0.0.1:8000/api/user/${username}/`)
     .then((response) => {
-    // console.log(response.data)
+    console.log(response.data)
     const cityNames = response.data.cities
     for (let city of cityNames) {
     promises.push(
@@ -59,7 +59,8 @@ function App() {
         
       >
         {getCities.map((city) => (
-          <CityCard key={`city__${city.id}`} name={city.name} username={username} image={city.weather[0].icon}>
+          <CityCard key={`city__${city.id}`} name={city.name} username={username} image={city.weather[0].icon}
+          lat={city.coord.lat} lon={city.coord.lon}>
             {city.main.temp-273.15}
             {city.main.temp_max-273.15}
             {city.main.temp_min-273.15}

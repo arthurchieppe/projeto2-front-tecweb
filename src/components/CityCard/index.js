@@ -44,7 +44,6 @@ export default function CityCard(props) {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-  var deleteName = '';
   
   function deleteCity(name) {
      axios
@@ -80,6 +79,26 @@ export default function CityCard(props) {
     // Directly return the joined string
     return splitStr.join(' '); 
  }
+
+  const [getCigs, setCigs] = useState(0);
+
+  //https://jasminedevv.github.io/AQI2cigarettes/
+  function getNumberCig() {
+    let lat = props.lat;
+    let lon = props.lon;
+    const token = "b41e25882385ee402f115680cb550c54"
+    axios
+    .get(`http://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${token}`)
+    .then((response) => {
+      let pm2_5 = response.data.list[0].components.pm2_5;
+      let numCigs = pm2_5/22
+      setCigs(numCigs);
+    });
+  }
+  // var getCigs = 0;
+  useEffect(() => {
+    var cigs = getNumberCig();
+  }, getCigs);
 
   return (
     <Card sx={{ maxWidth: 345 }}>
@@ -132,31 +151,7 @@ export default function CityCard(props) {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography paragraph>Method:</Typography>
-          <Typography paragraph>
-            Heat 1/2 cup of the broth in a pot until simmering, add saffron and set
-            aside for 10 minutes.
-          </Typography>
-          <Typography paragraph>
-            Heat oil in a (14- to 16-inch) paella pan or a large, deep skillet over
-            medium-high heat. Add chicken, shrimp and chorizo, and cook, stirring
-            occasionally until lightly browned, 6 to 8 minutes. Transfer shrimp to a
-            large plate and set aside, leaving chicken and chorizo in the pan. Add
-            pimentón, bay leaves, garlic, tomatoes, onion, salt and pepper, and cook,
-            stirring often until thickened and fragrant, about 10 minutes. Add
-            saffron broth and remaining 4 1/2 cups chicken broth; bring to a boil.
-          </Typography>
-          <Typography paragraph>
-            Add rice and stir very gently to distribute. Top with artichokes and
-            peppers, and cook without stirring, until most of the liquid is absorbed,
-            15 to 18 minutes. Reduce heat to medium-low, add reserved shrimp and
-            mussels, tucking them down into the rice, and cook again without
-            stirring, until mussels have opened and rice is just tender, 5 to 7
-            minutes more. (Discard any mussels that don’t open.)
-          </Typography>
-          <Typography>
-            Set aside off of the heat to let rest for 10 minutes, and then serve.
-          </Typography>
+          <Typography paragraph>Number of cigarettes "smoked": {getCigs}</Typography>
         </CardContent>
       </Collapse>
     </Card>
