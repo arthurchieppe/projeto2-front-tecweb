@@ -20,7 +20,7 @@ function App() {
   const cityNames = [];
   useEffect(() => {
     axios //Axios para Backend
-    .get(`http://127.0.0.1:8000/api/user/${username}/`)
+    .get(`https://morning-temple-71197.herokuapp.com/api/user/${username}/`)
     .then((response) => {
     console.log(response.data)
     const cityNames = response.data.cities

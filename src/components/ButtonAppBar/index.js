@@ -33,7 +33,7 @@ export default function ButtonAppBar(props) {
         city = response.data.name
       }
       axios
-      .get(`http://127.0.0.1:8000/api/user/${username}/`)
+      .get(`https://morning-temple-71197.herokuapp.com/api/user/${username}/`)
       .then((response) => {
         const lsCities = response.data.cities;
       
@@ -43,7 +43,7 @@ export default function ButtonAppBar(props) {
       console.log(lsCities);
       lsCities.push(city);
       axios
-      .post(`http://127.0.0.1:8000/api/user/${username}/`, {
+      .post(`https://morning-temple-71197.herokuapp.com/api/user/${username}/`, {
         "cities": lsCities
     })
     .then((response) => window.location.reload())

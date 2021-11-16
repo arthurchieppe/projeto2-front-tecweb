@@ -47,7 +47,7 @@ export default function CityCard(props) {
   
   function deleteCity(name) {
      axios
-      .get(`http://127.0.0.1:8000/api/user/${props.username}/`)
+      .get(`https://morning-temple-71197.herokuapp.com/api/user/${props.username}/`)
       .then((response) => {
       const lsCities = response.data.cities;
       // const normalized = name.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
@@ -55,7 +55,7 @@ export default function CityCard(props) {
       let arr = lsCities.filter(e => e !== name);
       console.log(arr) // https://stackoverflow.com/questions/9792927/javascript-array-search-and-remove-string
       axios
-      .post(`http://127.0.0.1:8000/api/user/${props.username}/`, {
+      .post(`https://morning-temple-71197.herokuapp.com/api/user/${props.username}/`, {
         "cities": arr
     })
     .then(window.location.reload())
