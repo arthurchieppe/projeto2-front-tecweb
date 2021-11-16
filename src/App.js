@@ -27,7 +27,7 @@ function App() {
     for (let city of cityNames) {
     promises.push(
       axios //Axios para API
-      .get(`http://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${token}`)
+      .get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${token}`)
       .then((response) => {
         getCities.push(response.data);
       })

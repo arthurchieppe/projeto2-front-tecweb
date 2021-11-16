@@ -63,7 +63,7 @@ export default function CityCard(props) {
   }
 
   function buildImageUrl() {
-    let url = `http://openweathermap.org/img/w/${props.image}.png`;
+    let url = `https://openweathermap.org/img/w/${props.image}.png`;
     return url
 
   }
@@ -88,7 +88,7 @@ export default function CityCard(props) {
     let lon = props.lon;
     const token = "b41e25882385ee402f115680cb550c54"
     axios
-    .get(`http://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${token}`)
+    .get(`https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${token}`)
     .then((response) => {
       let pm2_5 = response.data.list[0].components.pm2_5;
       let numCigs = pm2_5/22

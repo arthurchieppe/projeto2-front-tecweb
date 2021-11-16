@@ -24,7 +24,7 @@ export default function ButtonAppBar(props) {
     let city = valueRef.current.value;
     //Primeiro dar get para ver se existe:
     axios
-    .get(`http://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${token}`)
+    .get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${token}`)
     .then((response) => {
       if (response.data.code == "404") {
         return; //Caso cidade nao exista, nao faca nada
