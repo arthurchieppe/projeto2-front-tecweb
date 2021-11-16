@@ -1,3 +1,15 @@
+# Frontend do Projeto 2 de TecWeb
+O projeto consite em um app que mostra as condições climáticas atuais para diversas cidadeds. O frontend é responsável por fazer as requisições a OpenWeather, a API externa escolhida para o projeto.
+
+A página web é capaz de apresentar informações climáticas atuais para diversas cidades, incluindo informações como:
+* Temperatura (atual, máxima e mínima)
+* Umidade
+* Condições climáticas (sol, nublado, chuvoso, etc)
+* Ícone referente a condição climática atual
+
+A segunda funcionalidade do projeto pode ser acessada ao clicar na seta para baixo disponível em cada card de cidade. Nesse drop down menu, é possível visualizar uma estimativa relativa a quantidade de cigarros "fumados" ao viver naquela cidade por 24 horas, dado o índice de qualidade do ar dela.
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
